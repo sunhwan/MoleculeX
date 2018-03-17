@@ -43,3 +43,8 @@ class Element:
         assert elements_number[self.symbol] == self.number
 
         self.mass = elements_mass[self.number]
+
+    def __eq__(self, other):
+        if isinstance(other, Element):
+            return self.symbol == other.symbol
+        raise NotImplementedError

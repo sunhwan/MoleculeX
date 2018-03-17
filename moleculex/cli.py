@@ -5,6 +5,7 @@ from .molecule import Molecule
 
 def pdb2rtf(args):
     mol = Molecule.from_pdb(open(args.input))
+    mol.to_rtf(open('output.rtf', 'w'))
 
 def run(argv=sys.argv[1:]):
     parser = argparse.ArgumentParser()

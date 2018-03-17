@@ -8,9 +8,10 @@ class Atom:
 
     def __init__(self, attr_dict=None, **kwargs):
         for k in kwargs:
-            self.k = kwargs[k]
+            setattr(self, k, kwargs[k])
 
-        if 'symbol' in kwargs or 'number' in kwargs:
-            symbol = kwargs.get('symbol', None)
-            number = kwargs.get('number', None)
-            self.element = Element(symbol=symbol, number=number)
+        if 'symbol' in kwargs:
+            self.element = Element(symbol=self.symbol)
+        elif 'name' in kwargs:
+            symbol = self.name[0]
+            self.element = Element(symbol=symbol)
