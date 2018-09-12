@@ -73,5 +73,26 @@ class Molecule():
         return molecule
 
     def to_rtf(self, rtffile):
+        raise NotImplementedError
+
+    def to_pdb(self, pdbfile):
+        atomnr = 0
+        _atom = "ATOM  {atomnr:5}{name:^6}{resname:<4.4}{chainid}{resnr:4}    {x:8.3f}{y:8.3f}{z:8.3f}{occupancy:6.2f}{bfactor:6.2f}\n"
         for atom in self.atoms():
-            print(atom)
+            resname = atom.resname
+            atomnr += 1
+            chainid = 'A'
+            name = atom.name
+            resnr = atom.resnr
+            x = atom.x
+            y = atom.y
+            z = atom.z
+            try:
+                occupancy = atom.occupancy
+                bfactor = atom.bfactor
+            except:
+                occupancy = 0
+                bfactor = 0
+            pdbfile.write(_atom.format(**locals()))
+            #ATOM      1  N   MET A   1     109.412 102.640  60.093  1.00 73.05           N
+
